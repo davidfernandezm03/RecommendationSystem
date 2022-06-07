@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                El objetivo de esta consulta es obtener los animes favoritos
+                de los perfiles similares a ti. Selecciona tus dos animes favoritos y se
+                opbtendrán los animes favoritos de aquelos usuarios que también tengan
+                esos dos animes entre sus favoritos.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="fields">
+                    <fieldset>
+                        <legend>Datos de entrada</legend>
+                        <label for="title_1">Favorito:</label><br>
+                        <input type="text" id="title_1" name="title_1" value="{{ request.form['title_1'] }}"><br>
+                        <label for="title_2">Favorito:</label><br>
+                        <input type="text" id="title_2" name="title_2" value="{{ request.form['title_2'] }}"><br>
+                        <label for="gender">Sexo de los usuarios:</label><br>
+                        <input type="text" id="gender" name="gender" value="{{ request.form['gender'] }}"><br>
+                        <label for="max_results">Resultados:</label><br>
+                        <input type="text" id="max_results" name="max_results" value="{{ request.form['max_results'] }}"><br>
+                    </fieldset>
+                </div>
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Anime</th>
+                        <th>Puntuación</th>
+                        <th>Favoritos</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>{{ result.title }}</td>
+                            <td>{{ result.score }}</td>
+                            <td>{{ result.total }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

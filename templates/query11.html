@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                El objetivo es encontrar perfiles de usuarios con gustos similares.
+                Define tus tres animes favoritos y descubre aquellas personas que también
+                son esos sus animes favoritos.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="fields">
+                    <fieldset>
+                        <legend>Datos de entrada</legend>
+                        <label for="title_1">Favorito:</label><br>
+                        <input type="text" id="title_1" name="title_1" value="{{ request.form['title_1'] }}"><br>
+                        <label for="title_2">Favorito:</label><br>
+                        <input type="text" id="title_2" name="title_2" value="{{ request.form['title_2'] }}"><br>
+                        <label for="title_3">Favorito:</label><br>
+                        <input type="text" id="title_3" name="title_3" value="{{ request.form['title_3'] }}"><br>
+                    </fieldset>
+                </div>
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Perfil</th>
+                        <th>Genero</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>{{ result.user }}</td>
+                            <td>{{ result.gender }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <div class="network">
+                    <a href="{{ url_for('network') }}" target="_blank">Visualizar los resultados</a>
+                </div>
+
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

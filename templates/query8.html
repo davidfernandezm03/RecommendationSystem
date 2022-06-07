@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                 Con esta consulta puedes obtener la opinión de los perfiles
+                sobre un anime en concreto, analizando los gustos por el sexo de los
+                usuarios. Descubre si hay tendencia en un anime sobre los géneros de los usuarios.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="fields">
+                    <fieldset>
+                        <legend>Datos de entrada</legend>
+                        <label for="title">Anime:</label><br>
+                        <input type="text" id="title" name="title" value="{{ request.form['title'] }}"><br>
+                    </fieldset>
+                </div>
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Género</th>
+                        <th>Puntuación del Anime</th>
+                        <th>Media de Overall</th>
+                        <th>Media de Character</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>{{ result.gender }}</td>
+                            <td>{{ result.score }}</td>
+                            <td>{{ result.avg_Overall }}</td>
+                            <td>{{ result.avg_Character }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

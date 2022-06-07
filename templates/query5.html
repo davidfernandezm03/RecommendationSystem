@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                Con esta consulta obtienes los animes que han recibido más
+                opiniones entre todos los usuarios. Puedes analizar si la puntuación
+                establecida del anime concuera con las opiniones de los usuarios.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="fields">
+                    <fieldset>
+                        <legend>Resultados</legend>
+                        <label for="max_results"></label>
+                        <input type="text" id="max_results" name="max_results" value="{{ request.form['max_results'] }}"><br>
+                    </fieldset>
+                </div>
+
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Anime</th>
+                        <th>Puntuación</th>
+                        <th>Media de las reseñas</th>
+                        <th>Reseñas</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>{{ result.title }}</td>
+                            <td>{{ result.score }}</td>
+                            <td>{{ result.avg_Overall }}</td>
+                            <td>{{ result.total }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

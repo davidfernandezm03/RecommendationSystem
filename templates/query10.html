@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                A través de esta consulta obtienes los animes que han sido
+                más elegidos como favoritos entre los perfiles.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="fields">
+                    <fieldset>
+                        <legend>Resultados</legend>
+                        <label for="max_results"></label>
+                        <input type="text" id="max_results" name="max_results" value="{{ request.form['max_results'] }}"><br>
+                    </fieldset>
+                </div>
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Anime</th>
+                        <th>Total de usuarios</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>{{ result.title }}</td>
+                            <td>{{ result.inDegree }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

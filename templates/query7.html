@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                A través de esta consulta puedes obtener las distintas reseñas
+                que ha realizado un usuario. Selecciona un perfil que sea muy activo en
+                la comunidad para descubrir su opinión.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="fields">
+                    <fieldset>
+                        <legend>Datos de entrada</legend>
+                        <label for="name">Usuario:</label><br>
+                        <input type="text" id="name" name="name" value="{{ request.form['name'] }}"><br>
+                    </fieldset>
+                </div>
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Anime</th>
+                        <th>Puntuación</th>
+                        <th>Reseña</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>{{ result.title }}</td>
+                            <td>{{ result.score }}</td>
+                            <td>{{ result.Overall }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <div class="network">
+                    <a href="{{ url_for('network') }}" target="_blank">Visualizar los resultados</a>
+                </div>
+
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

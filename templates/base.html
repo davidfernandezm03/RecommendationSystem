@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icon.ico') }}">
+
+    <title>
+        Your Favourite Anime
+    </title>
+</head>
+<body>
+    <div id="header">
+        <header>
+            <a href="{{ url_for('index') }}" title="Home">
+                    <img src="{{ url_for('static', filename='img/icon.ico') }}" alt="icon">
+            </a>
+            <h1>Your Favourite Anime</h1>
+        </header>
+    </div>
+
+    <div id="db_button">
+        <aside>
+            <form action="" method="post">
+                <input type="submit" name="check_db" value="Status">
+            </form>
+        </aside>
+    </div>
+
+    <div id="db_conn">
+         <aside>
+            <p>
+                {% if connectivity %}
+                    <span class="connected">Connected</span>
+                {% else %}
+                    <span class="not_connected">Not Connected</span>
+                {% endif %}
+            </p>
+        </aside>
+    </div>
+
+    <div id="nav">
+        <nav>
+            <a href="https://es.wikipedia.org/wiki/Anime" target="_blank">
+                Anime
+            </a>
+            <a href="https://neo4j.com/" target="_blank">
+                Neo4j
+            </a>
+            <a href="https://myanimelist.net/" target="_blank">
+                MyAnimeList
+            </a>
+        </nav>
+    </div>
+
+    <div id="menu">
+        <ul class="exterior">
+            <li>
+                Obten información general
+                <ul class="interior">
+                    <li><a href="{{ url_for('query1') }}">Más populares</a></li>
+                    <li><a href="{{ url_for('query2') }}">Mejor valorados</a></li>
+                    <li><a href="{{ url_for('query3') }}">Similares</a></li>
+                    <li><a href="{{ url_for('query4') }}">Mejor valorados de un género</a></li>
+                </ul>
+            </li>
+            <li>
+                Selecciona en base a las opiniones de los demás usuarios
+                <ul class="interior">
+                    <li><a href="{{ url_for('query5') }}">Con más reseñas</a></li>
+                    <li><a href="{{ url_for('query6') }}">Muestra aleatoria de opiniones</a></li>
+                    <li><a href="{{ url_for('query7') }}">Opiniones de un conocido</a></li>
+                    <li><a href="{{ url_for('query8') }}">Reseñas por tipo de usuario</a></li>
+                    <li><a href="{{ url_for('query9') }}">Opinión personalizada</a></li>
+                </ul>
+            </li>
+            <li>
+                Ten en cuenta los favoritos de los usuarios
+                <ul class="interior">
+                    <li><a href="{{ url_for('query10') }}">Favoritos</a></li>
+                    <li><a href="{{ url_for('query11') }}">Usuarios afines</a></li>
+                    <li><a href="{{ url_for('query12') }}">Animes similares</a></li>
+                    <li><a href="{{ url_for('query13') }}">Filtro por favoritos</a></li>
+                    <li><a href="{{ url_for('query14') }}">Gusto de perfiles similares</a></li>
+                    <li><a href="{{ url_for('query15') }}">Utilizando perfiles analíticos</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="container">
+        <aside>
+            {% block content %} {% endblock %}
+        </aside>
+    </div>
+
+</body>
+</html>

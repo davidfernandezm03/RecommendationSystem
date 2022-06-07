@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                Con esta consulta obtienes aquellos animes que tienen una mayor
+                puntuación, de forma que se ordenan los animes con más score dado
+                con el objetivo de ordenarlos de formad descendente.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Anime</th>
+                        <th>Puntuación</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>
+                                <a href="{{ result.link_anime }}" target="_blank">
+                                    {{ result.title }}
+                                </a>
+                            </td>
+                            <td>{{ result.score }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

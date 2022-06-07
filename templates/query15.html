@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                A través de esta consulta puedes obtener los títulos de los animes
+                de un género donde previamente se han seleccionado perfiles que hayan
+                realizado buenas opiniones.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="fields">
+                    <fieldset>
+                        <legend>Datos de entrada</legend>
+                        <label for="genre">Género:</label><br>
+                        <input type="text" id="genre" name="genre" value="{{ request.form['genre'] }}"><br>
+                        <label for="gender">Sexo de los usuarios:</label><br>
+                        <input type="text" id="gender" name="gender" value="{{ request.form['gender'] }}"><br>
+                        <label for="min_score">Nota minima de la reseña:</label><br>
+                        <input type="text" id="min_score" name="min_score" value="{{ request.form['min_score'] }}"><br>
+                        <label for="max_results">Resultados:</label><br>
+                        <input type="text" id="max_results" name="max_results" value="{{ request.form['max_results'] }}"><br>
+                    </fieldset>
+                </div>
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Anime</th>
+                        <th>Favoritos</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>{{ result.title }}</td>
+                            <td>{{ result.total }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

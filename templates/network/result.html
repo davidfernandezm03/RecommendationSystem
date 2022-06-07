@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 600px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#97C2FC", "font": {"color": "white"}, "id": "One Piece", "label": "One Piece", "shape": "box", "title": "One Piece"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "Death Note", "label": "Death Note", "shape": "box", "title": "Death Note"}, {"color": "#97C2FC", "font": {"color": "white"}, "id": "Dragon Ball Z", "label": "Dragon Ball Z", "shape": "box", "title": "Dragon Ball Z"}, {"color": "#030233", "font": {"color": "white"}, "id": "JazzyJeff2891", "label": "JazzyJeff2891", "shape": "ellipse", "title": "JazzyJeff2891"}, {"color": "#030233", "font": {"color": "white"}, "id": "HideYashiro", "label": "HideYashiro", "shape": "ellipse", "title": "HideYashiro"}, {"color": "#030233", "font": {"color": "white"}, "id": "Eddiestain4002", "label": "Eddiestain4002", "shape": "ellipse", "title": "Eddiestain4002"}, {"color": "#030233", "font": {"color": "white"}, "id": "Magnord", "label": "Magnord", "shape": "ellipse", "title": "Magnord"}, {"color": "#030233", "font": {"color": "white"}, "id": "scorpi1411", "label": "scorpi1411", "shape": "ellipse", "title": "scorpi1411"}, {"color": "#030233", "font": {"color": "white"}, "id": "G0dLey", "label": "G0dLey", "shape": "ellipse", "title": "G0dLey"}, {"color": "#030233", "font": {"color": "white"}, "id": "henriquenery", "label": "henriquenery", "shape": "ellipse", "title": "henriquenery"}, {"color": "#030233", "font": {"color": "white"}, "id": "MarcusB", "label": "MarcusB", "shape": "ellipse", "title": "MarcusB"}, {"color": "#030233", "font": {"color": "white"}, "id": "anime-cat", "label": "anime-cat", "shape": "ellipse", "title": "anime-cat"}, {"color": "#030233", "font": {"color": "white"}, "id": "P1pis1990", "label": "P1pis1990", "shape": "ellipse", "title": "P1pis1990"}, {"color": "#030233", "font": {"color": "white"}, "id": "VascoCarvalho90", "label": "VascoCarvalho90", "shape": "ellipse", "title": "VascoCarvalho90"}, {"color": "#030233", "font": {"color": "white"}, "id": "AkumaDono", "label": "AkumaDono", "shape": "ellipse", "title": "AkumaDono"}, {"color": "#030233", "font": {"color": "white"}, "id": "Yorudan", "label": "Yorudan", "shape": "ellipse", "title": "Yorudan"}, {"color": "#030233", "font": {"color": "white"}, "id": "JaydeRahman", "label": "JaydeRahman", "shape": "ellipse", "title": "JaydeRahman"}, {"color": "#030233", "font": {"color": "white"}, "id": "iliasofsuburbia", "label": "iliasofsuburbia", "shape": "ellipse", "title": "iliasofsuburbia"}, {"color": "#030233", "font": {"color": "white"}, "id": "-Deoxys-", "label": "-Deoxys-", "shape": "ellipse", "title": "-Deoxys-"}, {"color": "#030233", "font": {"color": "white"}, "id": "TeamOtaku4Ever", "label": "TeamOtaku4Ever", "shape": "ellipse", "title": "TeamOtaku4Ever"}, {"color": "#030233", "font": {"color": "white"}, "id": "SpoilerMagnet", "label": "SpoilerMagnet", "shape": "ellipse", "title": "SpoilerMagnet"}, {"color": "#030233", "font": {"color": "white"}, "id": "Seyes01", "label": "Seyes01", "shape": "ellipse", "title": "Seyes01"}, {"color": "#030233", "font": {"color": "white"}, "id": "killertakedown", "label": "killertakedown", "shape": "ellipse", "title": "killertakedown"}, {"color": "#030233", "font": {"color": "white"}, "id": "Shinblue", "label": "Shinblue", "shape": "ellipse", "title": "Shinblue"}, {"color": "#030233", "font": {"color": "white"}, "id": "rixrax", "label": "rixrax", "shape": "ellipse", "title": "rixrax"}, {"color": "#030233", "font": {"color": "white"}, "id": "GreyWoolf", "label": "GreyWoolf", "shape": "ellipse", "title": "GreyWoolf"}, {"color": "#030233", "font": {"color": "white"}, "id": "Majkic666", "label": "Majkic666", "shape": "ellipse", "title": "Majkic666"}, {"color": "#030233", "font": {"color": "white"}, "id": "Marco_a_Phoenix", "label": "Marco_a_Phoenix", "shape": "ellipse", "title": "Marco_a_Phoenix"}, {"color": "#030233", "font": {"color": "white"}, "id": "JMKhan", "label": "JMKhan", "shape": "ellipse", "title": "JMKhan"}, {"color": "#030233", "font": {"color": "white"}, "id": "Akuma_X", "label": "Akuma_X", "shape": "ellipse", "title": "Akuma_X"}]);
+        edges = new vis.DataSet([{"arrows": "to", "from": "JazzyJeff2891", "to": "One Piece"}, {"arrows": "to", "from": "JazzyJeff2891", "to": "Death Note"}, {"arrows": "to", "from": "JazzyJeff2891", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "HideYashiro", "to": "One Piece"}, {"arrows": "to", "from": "HideYashiro", "to": "Death Note"}, {"arrows": "to", "from": "HideYashiro", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "Eddiestain4002", "to": "One Piece"}, {"arrows": "to", "from": "Eddiestain4002", "to": "Death Note"}, {"arrows": "to", "from": "Eddiestain4002", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "Magnord", "to": "One Piece"}, {"arrows": "to", "from": "Magnord", "to": "Death Note"}, {"arrows": "to", "from": "Magnord", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "scorpi1411", "to": "One Piece"}, {"arrows": "to", "from": "scorpi1411", "to": "Death Note"}, {"arrows": "to", "from": "scorpi1411", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "G0dLey", "to": "One Piece"}, {"arrows": "to", "from": "G0dLey", "to": "Death Note"}, {"arrows": "to", "from": "G0dLey", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "henriquenery", "to": "One Piece"}, {"arrows": "to", "from": "henriquenery", "to": "Death Note"}, {"arrows": "to", "from": "henriquenery", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "MarcusB", "to": "One Piece"}, {"arrows": "to", "from": "MarcusB", "to": "Death Note"}, {"arrows": "to", "from": "MarcusB", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "anime-cat", "to": "One Piece"}, {"arrows": "to", "from": "anime-cat", "to": "Death Note"}, {"arrows": "to", "from": "anime-cat", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "P1pis1990", "to": "One Piece"}, {"arrows": "to", "from": "P1pis1990", "to": "Death Note"}, {"arrows": "to", "from": "P1pis1990", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "VascoCarvalho90", "to": "One Piece"}, {"arrows": "to", "from": "VascoCarvalho90", "to": "Death Note"}, {"arrows": "to", "from": "VascoCarvalho90", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "AkumaDono", "to": "One Piece"}, {"arrows": "to", "from": "AkumaDono", "to": "Death Note"}, {"arrows": "to", "from": "AkumaDono", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "Yorudan", "to": "One Piece"}, {"arrows": "to", "from": "Yorudan", "to": "Death Note"}, {"arrows": "to", "from": "Yorudan", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "JaydeRahman", "to": "One Piece"}, {"arrows": "to", "from": "JaydeRahman", "to": "Death Note"}, {"arrows": "to", "from": "JaydeRahman", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "iliasofsuburbia", "to": "One Piece"}, {"arrows": "to", "from": "iliasofsuburbia", "to": "Death Note"}, {"arrows": "to", "from": "iliasofsuburbia", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "-Deoxys-", "to": "One Piece"}, {"arrows": "to", "from": "-Deoxys-", "to": "Death Note"}, {"arrows": "to", "from": "-Deoxys-", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "TeamOtaku4Ever", "to": "One Piece"}, {"arrows": "to", "from": "TeamOtaku4Ever", "to": "Death Note"}, {"arrows": "to", "from": "TeamOtaku4Ever", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "SpoilerMagnet", "to": "One Piece"}, {"arrows": "to", "from": "SpoilerMagnet", "to": "Death Note"}, {"arrows": "to", "from": "SpoilerMagnet", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "Seyes01", "to": "One Piece"}, {"arrows": "to", "from": "Seyes01", "to": "Death Note"}, {"arrows": "to", "from": "Seyes01", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "killertakedown", "to": "One Piece"}, {"arrows": "to", "from": "killertakedown", "to": "Death Note"}, {"arrows": "to", "from": "killertakedown", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "Shinblue", "to": "One Piece"}, {"arrows": "to", "from": "Shinblue", "to": "Death Note"}, {"arrows": "to", "from": "Shinblue", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "rixrax", "to": "One Piece"}, {"arrows": "to", "from": "rixrax", "to": "Death Note"}, {"arrows": "to", "from": "rixrax", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "GreyWoolf", "to": "One Piece"}, {"arrows": "to", "from": "GreyWoolf", "to": "Death Note"}, {"arrows": "to", "from": "GreyWoolf", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "Majkic666", "to": "One Piece"}, {"arrows": "to", "from": "Majkic666", "to": "Death Note"}, {"arrows": "to", "from": "Majkic666", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "Marco_a_Phoenix", "to": "One Piece"}, {"arrows": "to", "from": "Marco_a_Phoenix", "to": "Death Note"}, {"arrows": "to", "from": "Marco_a_Phoenix", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "JMKhan", "to": "One Piece"}, {"arrows": "to", "from": "JMKhan", "to": "Death Note"}, {"arrows": "to", "from": "JMKhan", "to": "Dragon Ball Z"}, {"arrows": "to", "from": "Akuma_X", "to": "One Piece"}, {"arrows": "to", "from": "Akuma_X", "to": "Death Note"}, {"arrows": "to", "from": "Akuma_X", "to": "Dragon Ball Z"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

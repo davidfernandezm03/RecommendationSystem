@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                Esta consulta obtiene aquellos usuarios que tienen marcado como
+                favorito a un anime en concreto. A partir de esos usuarios se seleccionan
+                sus animes favoritos pero solamente aquellos que sean del mismo género y
+                con una puntuación similar.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="fields">
+                    <fieldset>
+                        <legend>Datos de entrada</legend>
+                        <label for="title">Anime:</label><br>
+                        <input type="text" id="title" name="title" value="{{ request.form['title'] }}"><br>
+                        <label for="max_results">Resultados:</label><br>
+                        <input type="text" id="max_results" name="max_results" value="{{ request.form['max_results'] }}"><br>
+                    </fieldset>
+                </div>
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Anime</th>
+                        <th>Favoritos</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>{{ result.title }}</td>
+                            <td>{{ result.total }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

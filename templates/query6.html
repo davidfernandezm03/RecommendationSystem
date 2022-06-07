@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                A través de esta consulta puedes obtener las opiniones sobre un
+                anime en concreto, teniendo en cuenta que éstas han sido seleccionadas
+                de forma aleatoria.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="fields">
+                    <fieldset>
+                        <legend>Datos de entrada</legend>
+                        <label for="gender">Sexo de los usuarios:</label><br>
+                        <input type="text" id="gender" name="gender" value="{{ request.form['gender'] }}"><br>
+                        <label for="title">Anime:</label><br>
+                        <input type="text" id="title" name="title" value="{{ request.form['title'] }}"><br>
+                        <label for="max_results">Resultados:</label><br>
+                        <input type="text" id="max_results" name="max_results" value="{{ request.form['max_results'] }}"><br>
+                    </fieldset>
+                </div>
+
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Overall</th>
+                        <th>Character</th>
+                        <th>Enjoyment</th>
+                        <th>Animation</th>
+                        <th>Sound</th>
+                        <th>Story</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>{{ result.user }}</td>
+                            <td>{{ result.Overall }}</td>
+                            <td>{{ result.Character }}</td>
+                            <td>{{ result.Enjoyment }}</td>
+                            <td>{{ result.Animation }}</td>
+                            <td>{{ result.Sound }}</td>
+                            <td>{{ result.Story }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <div class="network">
+                    <a href="{{ url_for('network') }}" target="_blank">Visualizar los resultados</a>
+                </div>
+
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

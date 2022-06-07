@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="query">
+
+        <div class="description">
+            <h3>
+                Descripción de la consulta:
+            </h3>
+            <p>
+                A través de esta consulta puedes descubrir los tres animes
+                más populares entre los miembros de la comunidad MyAnimeList.
+            </p>
+        </div>
+
+        <div class="inputs">
+            <form action="" method="post">
+                <div class="submit_button">
+                    <input type="submit" name="run_query" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="outputs">
+            {% if response %}
+                <table>
+                    <tr>
+                        <th>Anime</th>
+                        <th>Miembros</th>
+                    </tr>
+                    {% for result in response %}
+                        <tr>
+                            <td>
+                                <a href="{{ result.link_anime }}" target="_blank">
+                                    {{ result.title }}
+                                </a>
+                            </td>
+                            <td>{{ result.n_members }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}
